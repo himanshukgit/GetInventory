@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "LocalInventory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<tr>
+    <td>Environment</td>
+    <td>
+        @Html.DropDownList("Env", (IEnumerable
+       <SelectListItem>)ViewBag.Results)
+    </td>
+</tr>
+
+@Scripts.Render("~/bundles/jquery")
+<div id="First">
+    @Html.Raw(File.ReadAllText(Server.MapPath("~/Out/Dev.html")))
+</div>
+<div id="Sec">
+    @Html.Raw(File.ReadAllText(Server.MapPath("~/Out/Prod.html")))
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Sec').hide();
+        $('#Env').change(function () {
+            var ddlValue = $(this).val();
+            if (ddlValue == "Dev") {
+                $('#First').show();
+                $('#Sec').hide();
+            }
+            else {
+                $('#Sec').show();
+                $('#First').hide();
+            }
+        });
+
+    });
+
+</script>
